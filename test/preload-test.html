@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<title>t</title>
+<form name="title"></form>
+<img name="createElement" src="data:,">
+<iframe name="body" srcdoc="<form name=forms></form><script>parent.r.child = String(document.forms)</script>"></iframe>
+<object id="toString"></object>
+<iframe src="child.html"></iframe>
+<form name="links"></form><form name="links"></form>
+<script>
+var r = {};
+r.title = String(document.title);
+r.ce = String(document.createElement);
+r.body = document.body === frames[0];
+r.toString = String(document.toString);
+r.links = Object.prototype.toString.call(document.links) + document.links.length;
+document.title = "x";
+r.titleAfterSet = String(document.title);
+r.titleEl = Document.prototype.querySelector.call(document, "title").textContent;
+r.allType = typeof document.all;
+r.notShadowed = typeof document.getElementById;
+document.foo = 1;
+r.expando = document.foo;
+document.write = function () {};
+r.writeOverride = String(document.write).slice(0, 12);
+r.ownKeys = Object.keys(document).join();
+var f = document.createElement === undefined ? null : Document.prototype.createElement.call(document, "form");
+f.name = "dir";
+document.documentElement.appendChild(f);
+r.dynamic = String(document.dir);
+f.remove();
+r.dynamicRemoved = String(document.dir);
+window.onload = () => setTimeout(() => console.log("RESULT " + JSON.stringify(r)), 200);
+</script>
