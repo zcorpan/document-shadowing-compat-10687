@@ -1,0 +1,17 @@
+id,url,rating,note
+a4c882f7e2a4,https://www.zipperenzo.nl/,improved,"Today: document.cookie (form name=cookie) breaks cookie code (""document.cookie.match is not a function""); hero images and Google Translate widget don't load. Blocking: they load."
+4d9092e1fa33,http://www.rajhlinky.wz.cz/,improved,"Today: document.body (iframe name=body) breaks the host's floating ad script (""document.body.appendChild is not a function""). Blocking: the ad renders."
+64e9e5c759a2,https://jpit.shop3.makeshop.jp/,no visible change,"Error ""document.head.appendChild is not a function"" (iframe name=head) goes away with blocking (review widget script)."
+117b2b1f1496,https://www.sunrise-tours.jp/,no visible change,"Error ""document.cookie.split is not a function"" goes away with blocking."
+4b664fdf2282,https://www.huisvuilophaler.nl/,no visible change,"Error ""documentCookies.split is not a function"" goes away with blocking."
+9c78e148e558,https://crimea-vip.ru/,no visible change,"Error ""document.cookie.match is not a function"" goes away with blocking."
+a9368d74a49d,https://psptips.client.jp/,no visible change,"Error ""b.body.appendChild is not a function"" (iframe name=body) goes away with blocking."
+b0440b5f6fd4,https://jiendou.sakura.ne.jp/,no visible change,"MutationObserver.observe error (document.body is an iframe's window today) goes away with blocking."
+baa8305b7b3d,https://vac.sjas.gov.si/,no visible change,"Text-length flag is a measurement artifact: the measurement reads document.body, shadowed by form name=body in A."
+941cd695d7a6,https://www.eirakudo.com/,no visible change,"Text-length flag is a measurement artifact (img name=body)."
+684f6a092fed,https://www.vizdiszkont.hu/,no visible change,Carousel slide differs (noise).
+1650c2cb24fe,https://btservis.hr/,no visible change,Carousel slide differs (noise).
+29fb577f495f,https://enosh.or.kr/,no visible change,Scroll-reveal section missing in A but present in A2 and B (noise).
+28b3312e7e3c,https://standardprice.kr/,no visible change,Small pixel difference (noise).
+a375d235f697,https://12v.org/,no visible change,Ad creative differs (noise).
+889f2dfba303,https://dinkle.partcommunity.com/,no visible change,"Error set differs; two reruns show both errors in today's behavior too (noise)."

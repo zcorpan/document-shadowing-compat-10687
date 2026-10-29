@@ -1,0 +1,69 @@
+{
+ "httparchive_totals": {
+  "desktop": 11650352,
+  "mobile": 15366242
+ },
+ "httparchive_4872_rows": {
+  "desktop": 268,
+  "mobile": 196
+ },
+ "httparchive_4872_distinct_pages": 294,
+ "cc_pages": 255716,
+ "cc_pages_with_shadowing_named_element": 24,
+ "cc_by_category_kind": {
+  "Document/attribute": 23,
+  "Document/method": 1
+ },
+ "cc_names": {
+  "cookie": 3,
+  "links": 10,
+  "body": 1,
+  "forms": 2,
+  "fonts": 2,
+  "domain": 4,
+  "title": 1,
+  "write": 1
+ },
+ "cc_pages_with_inline_ref": 0,
+ "detect_httparchive": {
+  "pages": 294,
+  "load_errors": 31,
+  "pages_with_access": 142,
+  "names": {
+   "hidden": 57,
+   "cookie": 47,
+   "title": 16,
+   "scripts": 11,
+   "body": 5,
+   "head": 5,
+   "when": 3,
+   "all": 2,
+   "forms": 2,
+   "domain": 2,
+   "images": 2,
+   "links": 2
+  },
+  "by_category_kind": {
+   "Document/attribute": 151,
+   "EventTarget/method": 3
+  }
+ },
+ "detect_cc": {
+  "pages": 24,
+  "load_errors": 2,
+  "pages_with_access": 5,
+  "names": {
+   "domain": 3,
+   "cookie": 2
+  },
+  "by_category_kind": {
+   "Document/attribute": 5
+  }
+ },
+ "compare_pages": 147,
+ "compare_flagged": 16,
+ "ratings": {
+  "improved": 2,
+  "no visible change": 14
+ }
+}

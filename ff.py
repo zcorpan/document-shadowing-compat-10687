@@ -15,9 +15,13 @@ PRELOAD = "\n".join(l for l in open(os.path.join(HERE, "preload.js")).read().spl
 PRELOAD_DECL = "() => { (%s)(%s); }" % (PRELOAD.strip(), json.dumps(sorted(CATEGORY)))
 
 
+COUNTRY_HOST = re.compile(r"\b((?:google|bing|yahoo|amazon|facebook)\.)(?:co\.)?(?!com\b|net\b|org\b)[a-z]{2}\b")
+
+
 def scrub(s):
-    """Strip URL queries and fragments (any scheme)."""
-    return re.sub(r"(\b[a-z][a-z0-9+.-]*://[^\s?#\"'<>]*)[?#][^\s\"'<>:]*", r"\1", s or "")
+    """Strip URL queries and fragments (any scheme) and mask country-specific hosts."""
+    s = re.sub(r"(\b[a-z][a-z0-9+.-]*://[^\s?#\"'<>]*)[?#][^\s\"'<>:]*", r"\1", s or "")
+    return COUNTRY_HOST.sub(r"\1<cc>", s)
 
 
 class Browser:
