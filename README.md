@@ -26,6 +26,9 @@ them into `data/summary.json`.
 - Before/after in Firefox Nightly 161 on the 147 pages that accessed a shadowed name: 0 got worse.
   2 visibly improved, 6 lost a script error with no visible change, and 8 more flagged pages were
   noise or measurement artifacts.
+- Properties that scripts add to the prototype chain (protected by dropping
+  `[LegacyOverrideBuiltIns]`, but not by Firefox's implementation) never collided with a named
+  element on the 294 HTTP Archive pages.
 
 ## 1. Use counter and HTTP Archive
 
@@ -75,6 +78,16 @@ recorded) and the 24 Common Crawl URLs:
 Common Crawl pages: `domain` (3) and `cookie` (2), 2 load errors. Nearly all callers are libraries
 that expect the real property.
 
+### Script-added properties
+
+The preload only covers built-in names, but counter 4872 also fires for properties that scripts add
+to the prototypes. `detect_expando.py` loaded the 294 HTTP Archive URLs again (30 hit the load
+timeout and were still checked) and, about 6 s after load, compared the own property names of each
+object on `document`'s prototype chain with the same objects on example.com, then matched new names
+against the named elements' names (`test/expando-test.html` checks it). One page added properties
+(spareparts.paus.de: `clone`, `concat`, `forEach`, `map`, … on `Object.prototype`), 157 had named
+elements, and no name matched.
+
 ## 4. Before/after in Firefox Nightly
 
 `ffcompare.py` loaded each of the 147 pages that accessed a shadowed name (142 HTTP Archive, 5
@@ -106,13 +119,17 @@ differs from A beyond the A/A2 noise (`out/flags.json`). `review/` has an A|B im
   safe as today, but they aren't protected against clobbering.
 
 Firefox's implementation is between the two: every Web IDL member at build time (so new members
-are covered as they ship), but not script-added properties.
+are covered as they ship), but not script-added properties. No page in this sample shadows a
+script-added property, so the before/after comparison applies to dropping
+`[LegacyOverrideBuiltIns]` too.
 
 ## Not covered
 
 - Accesses after load or on interaction (form submission, clicks), and child frames for detection.
 - Pages that use the Chrome-only `when` were measured in Firefox, which doesn't have it; their
   breakage is inferred from their code.
+- Script-added properties were checked in Firefox only (a polyfill that only runs in Chrome or
+  Safari would be missed), and only those still present about 6 s after load.
 - Firefox's per-name telemetry for all properties (Firefox 143 until its removal in 2026-09) isn't
   public.
 
@@ -125,6 +142,7 @@ bq query --use_legacy_sql=false --format=csv --max_rows=100000 < queries/4872-pa
 .venv/bin/python test/run_preload_test.py
 .venv/bin/python detect.py data/httparchive-urls.txt data/detect-httparchive.jsonl 4
 .venv/bin/python detect.py data/cc-urls.txt data/detect-cc.jsonl 4
+.venv/bin/python detect_expando.py data/httparchive-urls.txt data/detect-expando-httparchive.jsonl 4
 .venv/bin/python ffcompare.py data/compare-urls-0.txt out   # and -1, -2, -3
 .venv/bin/python ffanalyze.py out > out/flags.json
 python3 summarize.py

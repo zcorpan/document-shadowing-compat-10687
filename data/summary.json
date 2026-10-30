@@ -60,6 +60,13 @@
    "Document/attribute": 5
   }
  },
+ "detect_expando_httparchive": {
+  "pages": 294,
+  "load_errors": 30,
+  "pages_adding_to_prototypes": 1,
+  "pages_with_named_elements": 157,
+  "pages_with_hits": 0
+ },
  "compare_pages": 147,
  "compare_flagged": 16,
  "ratings": {

@@ -27,6 +27,13 @@ for label, f in [("detect_httparchive", "data/detect-httparchive.jsonl"), ("dete
         f"{CATEGORY[n]}/{kind(n)}" for r in recs for n in {e["name"] for e in r["shadow"]}))
     s[label] = d
 
+recs = [json.loads(l) for l in open("data/detect-expando-httparchive.jsonl")]
+s["detect_expando_httparchive"] = {
+    "pages": len(recs), "load_errors": sum(bool(r["load_error"]) for r in recs),
+    "pages_adding_to_prototypes": sum(bool(r["added"]) for r in recs),
+    "pages_with_named_elements": sum(bool(r["named"]) for r in recs),
+    "pages_with_hits": sum(bool(r["hits"]) for r in recs)}
+
 res = [json.loads(l) for l in open("out/results.jsonl")]
 s["compare_pages"] = len(res)
 s["compare_flagged"] = sum(r["flag"] is True for r in json.load(open("out/flags.json")))
