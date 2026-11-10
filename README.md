@@ -135,6 +135,8 @@ script-added property, so the before/after comparison applies to dropping
 
 ## Reproduce
 
+This run was done with the [`httparchive` skill](https://github.com/zcorpan/web-platform-skills/blob/main/docs/httparchive.md). The steps below are standalone and rerun the same analysis without the skill.
+
 ```sh
 python3 -m venv .venv && .venv/bin/pip install warcio selectolax selenium pillow
 bq query --use_legacy_sql=false --format=csv --max_rows=100000 < queries/4872-pages.sql > queries/4872-pages.csv
